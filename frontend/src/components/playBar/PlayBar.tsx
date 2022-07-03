@@ -7,6 +7,8 @@ import { MetaMaskInpageProvider } from "@metamask/providers";
 import { useUser } from "../../context/userContext";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import PauseCircleIcon from "@mui/icons-material/PauseCircle";
+import SkipNextIcon from "@mui/icons-material/SkipNext";
+import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 
 type Props = {
   song: Song | null;
@@ -20,42 +22,31 @@ type Song = {
   id: number;
 };
 
-export default function Playbar() {
+export default function Playbar({ song }: Props) {
   const [account, setAccount] = React.useState(null);
-
   const { userCTX, connectWalletCTX } = useUser();
 
-  const connectWallet = async () => {
-    try {
-      const { ethereum } = window;
-
-      if (!ethereum) {
-        alert("Please install Metamask Wallet");
-        return;
-      }
-
-      const accounts: any = await ethereum.request({
-        method: "eth_requestAccounts",
-      });
-
-      console.log("Connected", accounts[0]);
-      if (accounts[0]) {
-        connectWalletCTX({ address: accounts[0] });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <div className="playbarContainer">
       <div className="playbarContent">
         <div className="playbarLeft">
-          <div className="playbarSongTitle">Hello</div>
+          <div className="playbarSongTitle text-white">{song?.name}</div>
         </div>
         <div className="playbarCenter">
+          <SkipPreviousIcon
+            sx={{ fontSize: 40 }}
+            className="hover:cursor-pointer m-2 text-white hover:opacity-50"
+          />
           <div className="playbarPlayButton">
-            <PlayCircleIcon className="playbarPlayButtonIcon" />
+            <PlayCircleIcon
+              sx={{ fontSize: 60 }}
+              className="hover:cursor-pointer text-white"
+            />
           </div>
+          <SkipNextIcon
+            sx={{ fontSize: 40 }}
+            className="hover:cursor-pointer m-2 text-white"
+          />
         </div>
         <div className="playbarRight"></div>
       </div>

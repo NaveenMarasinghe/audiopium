@@ -92,7 +92,7 @@ export default function AudioCard({
           {mode === "view" && (
             <div className="flex">
               <div className="audioCardButton bg-purple-500 hover:bg-purple-600 text-white max-w-fit p-2 px-4 rounded-lg mx-auto">
-                <button onClick={() => mint(id)}>
+                <button onClick={() => handlePlayClick(id)}>
                   <PlayCircleIcon />
                 </button>
               </div>

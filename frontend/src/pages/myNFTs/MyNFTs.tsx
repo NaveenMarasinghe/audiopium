@@ -5,6 +5,7 @@ import { useUser } from "../../context/userContext";
 import Topbar from "../../components/topbar/Topbar";
 import AudioCard from "../../components/audioCard/AudioCard";
 import SkeltonGrid from "../../components/skeltonGrid/SkeltonGrid";
+import Playbar from "../../components/playbar/PlayBar";
 
 type Song = {
   name: string;
@@ -65,6 +66,7 @@ export default function MyNFTs() {
       return;
     }
     const nowSong = myNFTs[song];
+    setNowPlaying(nowSong);
     console.log("Now Playing :", nowSong);
     const audio = new Audio(
       "https://" + nowSong.song.slice(7, 66) + ".ipfs.dweb.link/blob"
@@ -101,7 +103,7 @@ export default function MyNFTs() {
           {!myNFTs && <SkeltonGrid />}
         </div>
       </div>
-      {/* <Playbar /> */}
+      <Playbar song={nowPlaying} />
     </div>
   );
 }
